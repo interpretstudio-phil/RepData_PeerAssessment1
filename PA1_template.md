@@ -165,7 +165,7 @@ summary(intimputeddaily.act$steps)
 
 ```r
 # add a computed variable factor with two levels weekday and weekend
-daytype.act <- mutate(imputed.act, daytype=factor(ifelse(wday(date)>5,'weekend','weekday')))
+daytype.act <- mutate(imputed.act, daytype=factor(ifelse(wday(date, week_start=1)>5,'weekend','weekday')))
 
 # summarise by day type and interval and average the steps
 intdaytype.act <- daytype.act %>% 
