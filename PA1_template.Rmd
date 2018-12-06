@@ -74,13 +74,13 @@ na.act <- act %>%
         mutate(steps=round(steps),date, interval)
 
 imputed.act <- bind_rows(na.act,filter(act,!is.na(steps)))
-intimputeddaily.act <- imputed.act %>% group_by(interval) %>% summarise(steps=mean(steps))
+imputeddaily.act <- imputed.act %>% group_by(date) %>% summarise(steps=sum(steps))
 
-# plot the average steps for each interval  across the days with imputed values 
-with(intimputeddaily.act, plot(interval, steps, type='l', ylab='average steps (incl imputed)'))
+# histogram of daily steps with 15 bins 
+hist(imputeddaily.act$steps, breaks=15, xlab = 'Daily Steps (incl imputed)', main = 'Daily Steps Histogram')
 
 # display the mean and median daily steps
-summary(intimputeddaily.act$steps)
+summary(imputeddaily.act$steps)
 
 ```
 **Are there differences in activity patterns between weekdays and weekends?**
